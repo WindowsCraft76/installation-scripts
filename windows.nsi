@@ -215,7 +215,7 @@ Section "Install"
 
   SetOutPath "$INSTDIR"
 
-  File "${SOURCE_DIR}"
+  File /r "${SOURCE_DIR}"
   File "${LICENSE_FILE}"
 
   CreateShortCut "$STARTMENU\Programs\${DISPLAY_NAME}.lnk" "$INSTDIR\${DISPLAY_NAME}.exe" "" "$INSTDIR\${DISPLAY_NAME}.exe"
