@@ -65,7 +65,7 @@ Var VERSION_RESULT
 ; !define MUI_ICON ""
 ; !define MUI_WELCOMEFINISHPAGE_BITMAP ""
 
-!define MUI_FINISHPAGE_RUN "${DISPLAY_NAME}.exe"
+!define MUI_FINISHPAGE_RUN "${APP_NAME}.exe"
 !define MUI_FINISHPAGE_RUN_TEXT "Launch the game when closing the installer."
 !define MUI_FINISHPAGE_SHOWREADME ""
 !define MUI_FINISHPAGE_SHOWREADME_TEXT "Create a desktop shortcut"
@@ -189,13 +189,13 @@ Function .onInit
   doUpdate:
     StrCpy $INSTDIR "$INSTALLED_DIR"
 
-    nsExec::ExecToStack 'tasklist /FI "IMAGENAME eq ${DISPLAY_NAME}.exe" /NH /FO CSV'
+    nsExec::ExecToStack 'tasklist /FI "IMAGENAME eq ${APP_NAME}.exe" /NH /FO CSV'
     Pop $R0
     Pop $R1
 
     ${If} $R1 != ""
       Push $R1
-      Push "${DISPLAY_NAME}.exe"
+      Push "${APP_NAME}.exe"
       Call StrContains
       Pop $R2
       ${If} $R2 != ""
@@ -218,7 +218,7 @@ Section "Install"
   File /r "${SOURCE_DIR}"
   File "${LICENSE_FILE}"
 
-  CreateShortCut "$STARTMENU\Programs\${DISPLAY_NAME}.lnk" "$INSTDIR\${DISPLAY_NAME}.exe" "" "$INSTDIR\${DISPLAY_NAME}.exe"
+  CreateShortCut "$STARTMENU\Programs\${DISPLAY_NAME}.lnk" "$INSTDIR\${APP_NAME}.exe" "" "$INSTDIR\${APP_NAME}.exe"
 
   WriteUninstaller "$INSTDIR\uninstall.exe"
   Call WriteRegistry
@@ -227,7 +227,7 @@ SectionEnd
 
 Function DesktopShortcut
 
-  CreateShortCut "$DESKTOP\${DISPLAY_NAME}.lnk" "$INSTDIR\${DISPLAY_NAME}.exe" "" "$INSTDIR\${DISPLAY_NAME}.exe"
+  CreateShortCut "$DESKTOP\${DISPLAY_NAME}.lnk" "$INSTDIR\${APP_NAME}.exe" "" "$INSTDIR\${APP_NAME}.exe"
 
 FunctionEnd
 
@@ -243,7 +243,7 @@ Function WriteRegistry
   WriteRegStr HKLM "${REGKEY}" "Publisher" "${COMPANY_NAME}"
   WriteRegStr HKLM "${REGKEY}" "InstallLocation" "$INSTDIR"
   WriteRegStr HKLM "${REGKEY}" "UninstallString" "$INSTDIR\uninstall.exe"
-  WriteRegStr HKLM "${REGKEY}" "DisplayIcon" "$INSTDIR\${DISPLAY_NAME}.exe"
+  WriteRegStr HKLM "${REGKEY}" "DisplayIcon" "$INSTDIR\${APP_NAME}.exe"
 
 FunctionEnd
 
@@ -253,13 +253,13 @@ FunctionEnd
 ; -------------------------
 Function un.onInit
 
-  nsExec::ExecToStack 'tasklist /FI "IMAGENAME eq ${DISPLAY_NAME}.exe" /NH /FO CSV'
+  nsExec::ExecToStack 'tasklist /FI "IMAGENAME eq ${APP_NAME}.exe" /NH /FO CSV'
   Pop $R0
   Pop $R1
 
   ${If} $R1 != ""
     Push $R1
-    Push "${DISPLAY_NAME}.exe"
+    Push "${APP_NAME}.exe"
     Call un.StrContains
     Pop $R2
     ${If} $R2 != ""
