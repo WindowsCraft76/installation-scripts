@@ -25,7 +25,7 @@
 Icon ""
 
 Name "${DISPLAY_NAME} ${DISPLAY_VERSION}"
-OutFile "${APP_NAME}Setup-${DISPLAY_VERSION}.exe"
+OutFile "${APP_NAME}Setup-${DISPLAY_VERSION}-${ARCHITECTURE}.exe"
 InstallDir "$LOCALAPPDATA\Programs\${DISPLAY_NAME}"
 !define REGKEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 
