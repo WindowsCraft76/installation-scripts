@@ -17,6 +17,7 @@
 !define DISPLAY_VERSION "v1.0.0r"
 !define APP_VERSION "1.0.0"
 !define SETUP_VERSION "1.0.0.0"
+!define ARCHITECTURE "" ; x64 or arm64
 
 !define SOURCE_DIR ""
 !define LICENSE_FILE ""
@@ -215,7 +216,7 @@ Section "Install"
 
   SetOutPath "$INSTDIR"
 
-  File /r "${SOURCE_DIR}"
+  File /r "${SOURCE_DIR}\${ARCHITECTURE}"
   File "${LICENSE_FILE}"
 
   CreateShortCut "$STARTMENU\Programs\${DISPLAY_NAME}.lnk" "$INSTDIR\${APP_NAME}.exe" "" "$INSTDIR\${APP_NAME}.exe"
