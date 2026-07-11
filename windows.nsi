@@ -216,7 +216,7 @@ Section "Install"
 
   SetOutPath "$INSTDIR"
 
-  File /r "${SOURCE_DIR}\${ARCHITECTURE}"
+  File /r "${SOURCE_DIR}\${ARCHITECTURE}\"
   File "${LICENSE_FILE}"
 
   CreateShortCut "$STARTMENU\Programs\${DISPLAY_NAME}.lnk" "$INSTDIR\${APP_NAME}.exe" "" "$INSTDIR\${APP_NAME}.exe"

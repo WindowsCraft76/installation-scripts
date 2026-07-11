@@ -1,0 +1,13 @@
+echo "Init..."
+chmod +x pkgroot/opt/Name/Name.x86_64
+
+fpm -s dir -t rpm \
+	-n Name \
+	-v 0.5.0 \
+	--description "Name" \
+	--url "https://example.com/" \
+	--license "" \
+	-C pkgroot \
+	opt usr
+
+echo "Finish!"
