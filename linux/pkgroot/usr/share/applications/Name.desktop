@@ -2,7 +2,7 @@
 Version=1.1
 Type=Application
 Name=Name
-Exec=/opt/Name/Name.x86_64
+Exec=name
 Icon=/usr/share/icons/hicolor/256x256/apps/Name.png
 Terminal=false
-Categories=Game;
+Categories=Example;

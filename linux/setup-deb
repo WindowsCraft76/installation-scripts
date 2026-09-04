@@ -1,13 +1,30 @@
-echo "Init..."
-chmod +x pkgroot/opt/Name/Name.x86_64
+#!/bin/sh
+set -eu
 
+echo "Init..."
+
+fpm_path=$(command -v fpm 2>/dev/null || true)
+if [ -z "$fpm_path" ]; then
+	echo "Error: fpm is not installed. Install Ruby and fpm: sudo apt install ruby-full && sudo gem install fpm" >&2
+	exit 1
+fi
+if [ ! -x "$fpm_path" ]; then
+	echo "Error: fpm is not executable: $fpm_path" >&2
+	exit 1
+fi
+
+chmod +x pkgroot/opt/Name/Name
+chmod +x pkgroot/usr/bin/name
+
+# --architecture amd64 or arm64
 fpm -s dir -t deb \
 	-n name \
-	-v 0.5.0 \
+	-v 0.1.0 \
 	--description "Name" \
 	--url "https://example.com/" \
-	--license "" \
+	--license "Unknown" \
 	-C pkgroot \
+	--architecture amd64 \
 	opt usr
-	
+
 echo "Finish!"
